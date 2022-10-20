@@ -1,16 +1,16 @@
 from odoo import api, models
 
 
-class DefaultWarehouseMixing(models.AbstractModel):
+class DefaultWarehouseMixin(models.AbstractModel):
     """If you inherit from this model and add a field called warehouse_id into
     the model, then the default value for such model will be the one
     set into the sales team.
 
-    Make sure to put this mixing at the top of inheritance (before the base model), e.g.
+    Make sure to put this mixin at the top of inheritance (before the base model), e.g.
 
-        _inherit = ["default.warehouse.mixing", "sale.order"]
+        _inherit = ["default.warehouse.mixin", "sale.order"]
     """
-    _name = "default.warehouse.mixing"
+    _name = "default.warehouse.mixin"
     _description = "Default Warehouse"
 
     @api.model
@@ -39,7 +39,7 @@ class DefaultWarehouseMixing(models.AbstractModel):
         """Pass sales team by context so it's taken into account when computing sequence name"""
         salesteam = self._get_salesteam_from_vals(vals)
         self_team = self.with_context(sequence_salesteam_id=salesteam.id)
-        return super(DefaultWarehouseMixing, self_team).create(vals)
+        return super(DefaultWarehouseMixin, self_team).create(vals)
 
     def _get_salesteam_from_vals(self, vals):
         """Determine sales team from creation values"""
@@ -52,3 +52,12 @@ class DefaultWarehouseMixing(models.AbstractModel):
         )
         salesteam = warehouse.sale_team_ids[:1]
         return salesteam
+
+    def onchange(self, values, field_name, field_onchange):
+        """Add an extra context to prevent current user's salesteam from being overwritten by onchanges
+
+        This is useful in e.g. sale orders, where sales person's sales team has priority over current
+        user's sales team.
+        """
+        self_team_ctx = self.with_context(keep_current_user_salesteam=True)
+        return super(DefaultWarehouseMixin, self_team_ctx).onchange(values, field_name, field_onchange)

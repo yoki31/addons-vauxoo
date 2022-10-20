@@ -52,7 +52,12 @@ msgstr ""
 " equipos de ventas"
 
 #. module: default_warehouse_from_sale_team
-#: model:ir.model,name:default_warehouse_from_sale_team.model_default_picking_type_mixing
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_res_users__sale_team_ids
+msgid "Allowed sales teams"
+msgstr "Equipos de ventas permitidos"
+
+#. module: default_warehouse_from_sale_team
+#: model:ir.model,name:default_warehouse_from_sale_team.model_default_picking_type_mixin
 msgid "Default Operation Type"
 msgstr "Tipo de Operación por defecto"
 
@@ -62,7 +67,7 @@ msgid "Default Team"
 msgstr "Equipo por defecto"
 
 #. module: default_warehouse_from_sale_team
-#: model:ir.model,name:default_warehouse_from_sale_team.model_default_warehouse_mixing
+#: model:ir.model,name:default_warehouse_from_sale_team.model_default_warehouse_mixin
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_crm_team__default_warehouse_id
 #: model:ir.module.category,name:default_warehouse_from_sale_team.default_warehouse_module
 msgid "Default Warehouse"
@@ -72,8 +77,8 @@ msgstr "Almacén por defecto"
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_account_journal__display_name
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_account_move__display_name
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_crm_team__display_name
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_picking_type_mixing__display_name
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_warehouse_mixing__display_name
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_picking_type_mixin__display_name
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_warehouse_mixin__display_name
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_ir_sequence__display_name
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_purchase_order__display_name
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_purchase_requisition__display_name
@@ -89,8 +94,8 @@ msgstr "Nombre a mostrar"
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_account_journal__id
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_account_move__id
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_crm_team__id
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_picking_type_mixing__id
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_warehouse_mixing__id
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_picking_type_mixin__id
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_warehouse_mixin__id
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_ir_sequence__id
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_purchase_order__id
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_purchase_requisition__id
@@ -145,8 +150,8 @@ msgstr "Diarios de equipos de ventas"
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_account_journal____last_update
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_account_move____last_update
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_crm_team____last_update
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_picking_type_mixing____last_update
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_warehouse_mixing____last_update
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_picking_type_mixin____last_update
+#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_default_warehouse_mixin____last_update
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_ir_sequence____last_update
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_purchase_order____last_update
 #: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_purchase_requisition____last_update
@@ -203,6 +208,12 @@ msgid "Sales Team"
 msgstr "Equipo de ventas"
 
 #. module: default_warehouse_from_sale_team
+#: model:ir.model.fields,help:default_warehouse_from_sale_team.field_res_users__sale_team_ids
+msgid ""
+"Sales teams allowed for the user, to give access to warehouses and their related documents."
+msgstr "Equipos de venta permitidos para el usuario, para dar acceso a almacenes y sus documentos relacionados."
+
+#. module: default_warehouse_from_sale_team
 #: model:ir.model,name:default_warehouse_from_sale_team.model_ir_sequence
 msgid "Sequence"
 msgstr "Secuencia"
@@ -219,22 +230,15 @@ msgid "Stock Move"
 msgstr "Movimiento de existencias"
 
 #. module: default_warehouse_from_sale_team
-#: model:ir.model.fields,help:default_warehouse_from_sale_team.field_res_users__sale_team_ids
-msgid ""
-"This is only an informative field. Go to Sales > Sales > Sales Teams to edit"
-msgstr ""
-"Esto es sólo un campo informativo. Vaya a Ventas> Ventas> Equipos de ventas "
-"para editar"
+#: code:addons/default_warehouse_from_sale_team/models/res_users.py:0
+#, python-format
+msgid "The chosen team (%s) is not in the allowed sales teams for this user"
+msgstr "El equipo de venta seleccionado (%s) no está entre los equipos permitidos para este usuario"
 
 #. module: default_warehouse_from_sale_team
 #: model:ir.model,name:default_warehouse_from_sale_team.model_stock_picking
 msgid "Transfer"
 msgstr "Traslado"
-
-#. module: default_warehouse_from_sale_team
-#: model:ir.model.fields,field_description:default_warehouse_from_sale_team.field_res_users__sale_team_ids
-msgid "User's sales teams"
-msgstr "Equipos de ventas de usuarios."
 
 #. module: default_warehouse_from_sale_team
 #: model:ir.model,name:default_warehouse_from_sale_team.model_res_users
@@ -277,11 +281,3 @@ msgstr "Almacén"
 #: model_terms:ir.ui.view,arch_db:default_warehouse_from_sale_team.crm_team_view_form
 msgid "Warehouse settings for the sales team"
 msgstr "Configuración de almacén para el equipo de ventas"
-
-#. module: default_warehouse_from_sale_team
-#: code:addons/default_warehouse_from_sale_team/models/res_users.py:0
-#, python-format
-msgid ""
-"You can not set the sales team %s as default because the user does not belongs to that sales team.\n"
-"Please go to Sales > Settings > Users > Sales Teams if you would like to add this user to the sales team"
-msgstr ""
